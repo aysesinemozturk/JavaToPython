@@ -13,11 +13,15 @@ public class Main {
         MatrixJava matrix2 = new MatrixJava(3,4, vector2);
 
         matrix1.report();
+        System.out.println();
         matrix2.report();
+        System.out.println();
 
         MatrixJava resultMatrix = matrix1.sum(matrix2);
         if(resultMatrix !=null){
             resultMatrix.report();
+        }else{
+            System.out.println("the summation of two matrixes is null!");
         }
     }
 }
