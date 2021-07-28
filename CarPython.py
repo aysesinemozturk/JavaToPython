@@ -25,7 +25,7 @@ class CarPython:
     
     def report(self):
         print("Distance travelled: ", self.distanceTravelled)
-        print("Remaining gasoline capacity: ", self.gasolineCapacity, "the number of passangers: ", self.numberOfPassangers)
+        print("Remaining gasoline capacity: ", self.gasolineCapacity)
 
 
 
