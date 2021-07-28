@@ -18,6 +18,7 @@ public class MatrixJava{
     //A constructor gets again matrix's attributes as parameters, however this time it also takes vectorvalues which was
     //given already in the main method is prepared for the matrix's values. 
     //If vectorvalues length is same as our matrix's dimension, it will take it as values.
+    //Otherwise, values of the matrix remains as zero, null.
 
     public MatrixJava(int NumberOfRows, int NumberOfColumns, int[] vectorValues){
         if(vectorValues.length != NumberOfColumns * NumberOfRows){
@@ -35,7 +36,7 @@ public class MatrixJava{
         }
     }
 
-    //sum up VectorValues -we printed over values[][] in previous method- with our initial matrix object values
+    //sum up two matrixes which are defined in main method.
     public MatrixJava sum(MatrixJava matrix){
         if(this.numberOfRows == matrix.numberOfRows && this.numberOfColumns == matrix.numberOfColumns){
             MatrixJava resultMatrix = new MatrixJava(this.numberOfRows, this.numberOfColumns);
