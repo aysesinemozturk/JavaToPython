@@ -19,7 +19,7 @@ public class MatrixJava{
     //given already in the main method is prepared for the matrix's values. 
     //If vectorvalues length is same as our matrix's dimension, it will take it as values.
 
-    public MatrixJava(int NumberOfRows, int NumberOfColumns, int [] vectorValues){
+    public MatrixJava(int NumberOfRows, int NumberOfColumns, int[] vectorValues){
         if(vectorValues.length != NumberOfColumns * NumberOfRows){
             System.out.println("the vectorValues array is not suitable for the matrix dimension.");
         }else{
@@ -51,7 +51,7 @@ public class MatrixJava{
         }
     }
 
-    //report the initial matrix object to the console
+    //report the result matrix object to the console
     public void report(){
         
         for(int i = 0; i < numberOfRows; i++) {
