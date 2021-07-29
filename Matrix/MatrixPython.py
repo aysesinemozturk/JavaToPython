@@ -17,24 +17,24 @@ class MatrixPython:
     # Otherwise, values of the matrix remains as zero, null.
 
     def __init__(self, NumberOfRows, NumberOfColumns, vectorValues):
-        if(vectorValues.length != NumberOfColumns * NumberOfRows):
+        if(len(vectorValues) != NumberOfColumns * NumberOfRows):
             print('the vectorValues array is not suitable for the matrix dimension.')
         else:
             self.numberOfRows = NumberOfRows
             self.numberOfColumns = NumberOfColumns
-            values = [self.numberOfRows][self.numberOfColumns]
+            values = [self.numberOfRows-1][self.numberOfColumns-1]
 
-            for i in range (0,self.numberOfRows):
-                for j in range(0,self.numberOfColumns):
-                    values[i][j] = vectorValues[i*self.numberOfColumns + j]
+            for i in range (self.numberOfRows):
+                for j in range(self.numberOfColumns):
+                    values[i][j] = vectorValues[i *self.numberOfColumns + j]
 
     # sum up two matrixes which are defined in main method.
     def sum(self, matrix):
         if(self.numberOfRows == matrix.numberOfRows and self.numberOfColumns == matrix.numberOfColumns):
             resultMatrix = MatrixPython(self.numberOfRows, self.numberOfColumns)
 
-            for i in range (0,self.numberOfRows):
-                for j in range(0,self.numberOfColumns):
+            for i in range (self.numberOfRows):
+                for j in range(self.numberOfColumns):
                     resultMatrix.values[i][j] = self.values[i][j] + matrix.values[i][j]
             
             return resultMatrix
@@ -44,11 +44,11 @@ class MatrixPython:
     #report the result matrix object to the console
     def report(self):
         
-        for i in range(0,self.numberOfRows):
+        for i in range(self.numberOfRows):
             print('|')
-            for j in range(0, self.numberOfColumns):
+            for j in range(self.numberOfColumns):
                 print(self.values[i][j])
-                if(j < numberOfColumns - 1):
+                if(j < self.numberOfColumns - 1):
                     print('','')
             
             print('|')
