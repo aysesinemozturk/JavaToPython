@@ -9,9 +9,9 @@ matrix1 = MatrixPython(3,4, vector1)
 matrix2 = MatrixPython(3,4, vector2)
 
 matrix1.report()
-print()
+print('')
 matrix2.report()
-print()
+print('')
 
 resultMatrix = matrix1.sum(matrix2)
 if(resultMatrix != None):
