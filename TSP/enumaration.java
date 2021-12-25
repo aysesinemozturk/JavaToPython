@@ -6,11 +6,16 @@ public class enumaration{
 
     public static void main(String[] args) {
         
+        //total number of cities that we would like to examine
+        //the problem starts with 3 cities minimum
+        //so 5 represents 3,4,5,6, and 7 cities at each iteraion
         double [] CPU_Time = new double[5];
         int index = 0;
         
         //it will take nodes number from 3 nodes to 7 nodes
         //At each iteration, it will store cpu time in array
+
+        //please do not exceed 12 cities :)
         for(int i = 3; i < CPU_Time.length + 3; i++){
             long startTime = System.nanoTime();
             int[] nodeList = new int[i];
