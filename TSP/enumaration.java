@@ -37,9 +37,9 @@ public class enumaration{
             CPU_Time[index] =  Execution_time;
             index ++; 
         }
-        System.out.println();
         System.out.println("---  CPU TIME ---");
-        System.out.println("CPU Time of nodes from three to "+(CPU_Time.length+2) +": "+ Arrays.toString(CPU_Time));
+        System.out.println("CPU Time of nodes from 3 to "+(CPU_Time.length+2) +": "+ Arrays.toString(CPU_Time));
+        
         //End of main method
         
     }
@@ -155,7 +155,7 @@ public class enumaration{
             
             //in order to compare how number of possible routes increase exponentially,
             //we calculate all possible routes at each iteration
-            System.out.println("--- SOLUTION REPORT ---");
+            System.out.println("/n--- SOLUTION REPORT ---");
             System.out.println("The total number of possible routes: " + DistArr.length);
             
             //find min in distance array 
