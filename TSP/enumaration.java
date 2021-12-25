@@ -1,19 +1,65 @@
 package TSP;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class enumaration{
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
-        int[] nodeList = new int[5];
-        for(int i=0;i<nodeList.length;i++) {
-            nodeList[i] = i;
+        
+        double [] CPU_Time = new double[5];
+        int index = 0;
+        
+        for(int i = 3; i <= 7; i++){
+            long startTime = System.nanoTime();
+            int[] nodeList = new int[i];
+            
+            for(int m = 0; m < nodeList.length; m++) {
+                nodeList[m] = m;
+            }
+            
+            
+            System.out.println("--- DISTANCE MATRIX ---");
+            
+            
+            printArraylist(candidateRoutes(nodeList), DistanceBetweenNodes(nodeList));
+            
+            long endTime = System.nanoTime();
+            double Execution_time = ((endTime-startTime)/1000000);
+            CPU_Time[index] =  Execution_time;
+            index ++; 
         }
-        printArraylist(candidateRoutes(nodeList));
-        long endTime = System.nanoTime();
-        System.out.println("Execution time:"+(endTime-startTime)/1000000);
-        }
+        System.out.println();
+        System.out.println(Arrays.toString(CPU_Time));
+        //End of main method
+        
+    }
     
+        //random distances between each nodes, distance [i][j] = distance [j][i]
+        //node i to i should be 0
+        public static int[][] DistanceBetweenNodes(int[] nodeList){
+            int[][] DistanceBetweenNodes = new int[nodeList.length +1][nodeList.length +1];
+            
+            for(int i = 0; i < nodeList.length; i++){
+                System.out.print("[");
+                for(int j = 0; j < nodeList.length; j++){
+                    if(i == j){
+                        DistanceBetweenNodes[i][j] = 0;
+                    }else if(i > j){
+                        DistanceBetweenNodes[i][j] = DistanceBetweenNodes[j][i];    
+                    }else{    
+                        DistanceBetweenNodes[i][j] = (int) (Math.random()*100);    
+                    }    
+                    
+                    System.out.print(DistanceBetweenNodes[i][j] + ",");
+                }
+                System.out.print("]");
+                System.out.println();
+            }
+            System.out.println();
+            return DistanceBetweenNodes;
+            
+        }
+        
         public static ArrayList<int[]> candidateRoutes (int[] nodeList){
             int[] tabuList = new int[0];
             int[] candidateList = nodeList;
@@ -65,14 +111,38 @@ public class enumaration{
             return anotherArray;
         }
     
-        public static void printArraylist (ArrayList<int[]> aList) {
+        public static void printArraylist (ArrayList<int[]> aList, int[][] DistanceBetweenNodes) {
+            
+            //we will store total distance of each routes
+            int [] DistArr = new int[aList.size()];
+            int k = 0;
+            
             for(int[] anIntArray:aList) {
                 //iterate the retrieved array an print the individual elements
-                for (int aNumber : anIntArray) {
-                    System.out.print(aNumber+",");
+                int distance = 0;
+                for(int i = 0; i< anIntArray.length; i++){
+                    System.out.print(anIntArray[i] + ",");
+                    if(i < anIntArray.length -1){
+                        distance += DistanceBetweenNodes[anIntArray[i]][anIntArray[i+1]];  
+                    }else if( i == anIntArray.length - 1){
+                        distance += DistanceBetweenNodes[anIntArray[i]][anIntArray[0]];
+                    }
+                    
                 }
+                System.out.println(); 
+                System.out.println("Total Distance: " + distance);
                 System.out.println();
+                
+                //store distances
+                DistArr[k] = distance;
+                k++;
             }
+            System.out.println(Arrays.toString(DistArr));
+            
+            //find min in distance array
+            Arrays.sort(DistArr); 
+            System.out.println("The shortest distance in the problem: " + DistArr[0]);
+            System.out.println();
         }
 }
 
