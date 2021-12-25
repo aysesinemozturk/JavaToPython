@@ -2,6 +2,8 @@ package TSP;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//AYŞE SİNEM ÖZTÜRK
+//S015076
 public class enumaration{
 
     public static void main(String[] args) {
@@ -11,6 +13,11 @@ public class enumaration{
         //so 5 represents 3,4,5,6, and 7 cities at each iteraion
         double [] CPU_Time = new double[5];
         int index = 0;
+        
+        //we want to see how total number of routes will increase exponentially in each iteration
+        int[] TotalFeasibleRoutes = new int[CPU_Time.length];
+        //it is for total possinle routes array in order to add element
+        int index2= 0;
         
         //it will take nodes number from 3 nodes to 7 nodes
         //At each iteration, it will store cpu time in array
@@ -23,20 +30,21 @@ public class enumaration{
             for(int m = 0; m < nodeList.length; m++) {
                 nodeList[m] = m;
             }
-            
-            
             System.out.println("--- DISTANCE MATRIX ---");
             
             //we will create random distance matrix for each iteration
             //so nodes 3 distance matrix will be different from nodes 4 distance matrix
             //therefore, shortest distance can differentiate at each iteraion
-            printArraylist(candidateRoutes(nodeList), DistanceBetweenNodes(nodeList));
+            printArraylist(candidateRoutes(nodeList), DistanceBetweenNodes(nodeList), TotalFeasibleRoutes, index2);
             
             long endTime = System.nanoTime();
             double Execution_time = ((endTime-startTime)/1000000);
             CPU_Time[index] =  Execution_time;
-            index ++; 
+            index ++;
+            index2++; 
         }
+        System.out.println("--- TOTAL NUMBER OF ROUTES OF EACH ITERATION ---");
+        System.out.println("total number of routes from 3 to "+(CPU_Time.length+2) +": "+ Arrays.toString(TotalFeasibleRoutes));
         System.out.println("---  CPU TIME ---");
         System.out.println("CPU Time of nodes from 3 to "+(CPU_Time.length+2) +": "+ Arrays.toString(CPU_Time));
         
@@ -120,11 +128,11 @@ public class enumaration{
             return anotherArray;
         }
     
-        public static void printArraylist (ArrayList<int[]> aList, int[][] DistanceBetweenNodes) {
+        public static void printArraylist (ArrayList<int[]> aList, int[][] DistanceBetweenNodes, int[] TotalFeasibleRoutes, int index2) {
             
             //we will store total distance of each possible routes
-            int [] DistArr = new int[aList.size()];
             int k = 0;
+            int [] DistArr = new int[aList.size()];
             
             for(int[] anIntArray:aList) {
                 //iterate the retrieved array an print the individual elements
@@ -158,10 +166,13 @@ public class enumaration{
             System.out.println("\n--- SOLUTION REPORT ---");
             System.out.println("The total number of possible routes: " + DistArr.length);
             
+            TotalFeasibleRoutes[index2] = DistArr.length;
+            
             //find min in distance array 
             Arrays.sort(DistArr); 
             System.out.println("The shortest distance in the problem: " + DistArr[0]);
             System.out.println();
+            
         }
 }
 
