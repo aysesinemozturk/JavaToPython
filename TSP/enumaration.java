@@ -149,13 +149,14 @@ public class enumaration{
                 k++;
             }
             
-            System.out.println("--- SOLUTION REPORT ---");
+            System.out.println("--- ALL POSSIBLE ROUTES --- /n");
             //we want to see all possible solutions' distance in order to find the minimum one
             System.out.println(Arrays.toString(DistArr));
             
             //in order to compare how number of possible routes increase exponentially,
             //we calculate all possible routes at each iteration
-            System.out.println("the total number of possible routes: " + DistArr.length);
+            System.out.println("--- SOLUTION REPORT ---");
+            System.out.println("The total number of possible routes: " + DistArr.length);
             
             //find min in distance array 
             Arrays.sort(DistArr); 
