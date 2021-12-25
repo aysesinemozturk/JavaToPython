@@ -9,7 +9,9 @@ public class enumaration{
         double [] CPU_Time = new double[5];
         int index = 0;
         
-        for(int i = 3; i <= 7; i++){
+        //it will take nodes number from 3 nodes to 7 nodes
+        //At each iteration, it will store cpu time in array
+        for(int i = 3; i < CPU_Time.length + 3; i++){
             long startTime = System.nanoTime();
             int[] nodeList = new int[i];
             
@@ -20,7 +22,9 @@ public class enumaration{
             
             System.out.println("--- DISTANCE MATRIX ---");
             
-            
+            //we will create random distance matrix for each iteration
+            //so nodes 3 distance matrix will be different from nodes 4 distance matrix
+            //therefore, shortest distance can differentiate at each iteraion
             printArraylist(candidateRoutes(nodeList), DistanceBetweenNodes(nodeList));
             
             long endTime = System.nanoTime();
@@ -29,11 +33,12 @@ public class enumaration{
             index ++; 
         }
         System.out.println();
-        System.out.println(Arrays.toString(CPU_Time));
+        System.out.println("---  CPU TIME ---");
+        System.out.println("CPU Time of nodes from three to "+(CPU_Time.length+2) +": "+ Arrays.toString(CPU_Time));
         //End of main method
         
     }
-    
+
         //random distances between each nodes, distance [i][j] = distance [j][i]
         //node i to i should be 0
         public static int[][] DistanceBetweenNodes(int[] nodeList){
@@ -42,11 +47,11 @@ public class enumaration{
             for(int i = 0; i < nodeList.length; i++){
                 System.out.print("[");
                 for(int j = 0; j < nodeList.length; j++){
-                    if(i == j){
+                    if(i == j){ //when it travels to itself
                         DistanceBetweenNodes[i][j] = 0;
-                    }else if(i > j){
+                    }else if(i > j){ // in order to make same number of the same route
                         DistanceBetweenNodes[i][j] = DistanceBetweenNodes[j][i];    
-                    }else{    
+                    }else{ // take random number up to 100  
                         DistanceBetweenNodes[i][j] = (int) (Math.random()*100);    
                     }    
                     
@@ -56,8 +61,7 @@ public class enumaration{
                 System.out.println();
             }
             System.out.println();
-            return DistanceBetweenNodes;
-            
+            return DistanceBetweenNodes;    
         }
         
         public static ArrayList<int[]> candidateRoutes (int[] nodeList){
@@ -113,7 +117,7 @@ public class enumaration{
     
         public static void printArraylist (ArrayList<int[]> aList, int[][] DistanceBetweenNodes) {
             
-            //we will store total distance of each routes
+            //we will store total distance of each possible routes
             int [] DistArr = new int[aList.size()];
             int k = 0;
             
@@ -123,8 +127,10 @@ public class enumaration{
                 for(int i = 0; i< anIntArray.length; i++){
                     System.out.print(anIntArray[i] + ",");
                     if(i < anIntArray.length -1){
+                        //calculating distance 
                         distance += DistanceBetweenNodes[anIntArray[i]][anIntArray[i+1]];  
                     }else if( i == anIntArray.length - 1){
+                        //calculating total ditance of the solution
                         distance += DistanceBetweenNodes[anIntArray[i]][anIntArray[0]];
                     }
                     
@@ -137,9 +143,16 @@ public class enumaration{
                 DistArr[k] = distance;
                 k++;
             }
+            
+            System.out.println("--- SOLUTION REPORT ---");
+            //we want to see all possible solutions' distance in order to find the minimum one
             System.out.println(Arrays.toString(DistArr));
             
-            //find min in distance array
+            //in order to compare how number of possible routes increase exponentially,
+            //we calculate all possible routes at each iteration
+            System.out.println("the total number of possible routes: " + DistArr.length);
+            
+            //find min in distance array 
             Arrays.sort(DistArr); 
             System.out.println("The shortest distance in the problem: " + DistArr[0]);
             System.out.println();
